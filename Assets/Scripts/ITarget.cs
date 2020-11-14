@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-
-namespace Assets.Scripts
+﻿namespace Assets.Scripts
 {
     public interface ITarget
     {
-        public void Hit();
+        void Hit();
     }
 }

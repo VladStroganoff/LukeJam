@@ -1,6 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
+
 namespace Assets.Scripts
 {
     public class Gun : MonoBehaviour
@@ -10,6 +11,7 @@ namespace Assets.Scripts
         public float RayDistance = 1000f;
         private List<Transform> _bones = new List<Transform>();
         private Transform _muzzleBone;
+        public SteamVR_Action_Boolean ShootAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("default", "Shoot");
 
         void Start()
         {
@@ -20,6 +22,8 @@ namespace Assets.Scripts
                 Debug.Log(bone.name);
                 if (bone.name == "Bone_Muzzle")
                     _muzzleBone = bone.transform;
+
+                ShootAction.onStateDown += ShootAction_onStateDown;
             }
         }
 
@@ -39,6 +43,11 @@ namespace Assets.Scripts
             {
                 sys.Emit(1);
             }
+        }
+
+        private void ShootAction_onStateDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+        {
+            Fire();
         }
     }
 }

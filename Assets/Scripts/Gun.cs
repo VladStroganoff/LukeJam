@@ -15,11 +15,9 @@ namespace Assets.Scripts
 
         void Start()
         {
-
             foreach (var bone in GameObject.FindGameObjectsWithTag("Bone"))
             {
                 _bones.Add(bone.transform);
-                Debug.Log(bone.name);
                 if (bone.name == "Bone_Muzzle")
                     _muzzleBone = bone.transform;
 
@@ -30,11 +28,15 @@ namespace Assets.Scripts
         public void Fire()
         {
             var ray = new Ray(_muzzleBone.position, _muzzleBone.forward);
-            var cast = Physics.Raycast(ray, out var rayHit, RayDistance, 0, QueryTriggerInteraction.UseGlobal);
-            foreach (ITarget target in rayHit.transform.gameObject.GetComponents<ITarget>())
-            {
-                target.Hit();
-            }
+            var cast = Physics.Raycast(ray, out var rayHit, RayDistance, -1, QueryTriggerInteraction.UseGlobal);
+            Debug.DrawRay(_muzzleBone.position, _muzzleBone.forward, Color.red);
+            var rayhit = rayHit.transform?.gameObject?.GetComponents<ITarget>();
+            Debug.Log(rayHit.transform?.gameObject);
+            if (rayhit != null && rayhit.Length > 0)
+                foreach (ITarget target in rayhit)
+                {
+                    target.Hit();
+                }
         }
 
         public void ShootingGraphics()

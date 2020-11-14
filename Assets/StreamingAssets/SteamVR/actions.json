@@ -6,6 +6,11 @@
       "requirement": "mandatory"
     },
     {
+      "name": "/actions/default/in/pose",
+      "type": "pose",
+      "requirement": "mandatory"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     }

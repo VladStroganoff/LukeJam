@@ -2,6 +2,6 @@
 {
     public interface ITarget
     {
-        public void Hit();
+        void Hit();
     }
 }

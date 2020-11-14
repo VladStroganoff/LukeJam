@@ -19,6 +19,8 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_default_Shoot;
         
+        private static SteamVR_Action_Pose p_default_pose;
+        
         private static SteamVR_Action_Vibration p_default_Haptic;
         
         public static SteamVR_Action_Boolean default_Shoot
@@ -26,6 +28,14 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.p_default_Shoot.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Pose default_pose
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_pose.GetCopy<SteamVR_Action_Pose>();
             }
         }
         
@@ -41,14 +51,17 @@ namespace Valve.VR
         {
             Valve.VR.SteamVR_Input.actions = new Valve.VR.SteamVR_Action[] {
                     SteamVR_Actions.default_Shoot,
+                    SteamVR_Actions.default_pose,
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
-                    SteamVR_Actions.default_Shoot};
+                    SteamVR_Actions.default_Shoot,
+                    SteamVR_Actions.default_pose};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
                     SteamVR_Actions.default_Haptic};
-            Valve.VR.SteamVR_Input.actionsPose = new Valve.VR.SteamVR_Action_Pose[0];
+            Valve.VR.SteamVR_Input.actionsPose = new Valve.VR.SteamVR_Action_Pose[] {
+                    SteamVR_Actions.default_pose};
             Valve.VR.SteamVR_Input.actionsBoolean = new Valve.VR.SteamVR_Action_Boolean[] {
                     SteamVR_Actions.default_Shoot};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[0];
@@ -62,6 +75,7 @@ namespace Valve.VR
         private static void PreInitActions()
         {
             SteamVR_Actions.p_default_Shoot = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Shoot")));
+            SteamVR_Actions.p_default_pose = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/default/in/pose")));
             SteamVR_Actions.p_default_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/default/out/Haptic")));
         }
     }

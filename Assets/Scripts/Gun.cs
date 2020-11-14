@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    public List<ParticleSystem> Particles = new List<ParticleSystem>();
+    public List<AudioSource> Audio = new List<AudioSource>();
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShootingGraphics()
     {
-        
+        foreach(ParticleSystem sys in Particles)
+        {
+            sys.Emit(1);
+        }
     }
 }

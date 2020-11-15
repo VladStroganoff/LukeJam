@@ -18,16 +18,31 @@ public class GameManager : MonoBehaviour
      * spawn the next one
      * we need a list of minigames
      * */
-    public List<GameObject> Minigames;
+
+    public static GameManager Instance;
+
+    public List<Scene> Minigames;
 
     private int MinigameIterator = 0;
 
-    public GameObject ActiveMinigame;
+    public Scene ActiveMinigame;
     // int score
     // int difficulty
 
     public int PlayerHealth = 5;
-    
+
+    private void Awake()
+    {
+        if(Instance)
+        {
+            Debug.LogError("Why are there two game managers");
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     public void StartGame()
     {
         LoadMiniGame(Minigames[MinigameIterator]);
@@ -55,15 +70,12 @@ public class GameManager : MonoBehaviour
         LoadMiniGame(Minigames[MinigameIterator]);
     }
 
-    private void LoadMiniGame(GameObject minigame)
+    private void LoadMiniGame(Scene minigameScene)
     {
-        Destroy(ActiveMinigame);
-        ActiveMinigame = minigame;
-        Instantiate(minigame, transform);
-        var mgManager = minigame.GetComponent<MinigameManager>();
-        if (!mgManager)
-            Debug.LogError("Minigame Manager not found");
-        mgManager.StartMinigame();
-        mgManager.OnMinigameEnded += MiniGameFinished;
+        //hide the scene somehow
+        SceneManager.UnloadSceneAsync(ActiveMinigame);
+        ActiveMinigame = minigameScene;
+        SceneManager.LoadSceneAsync(minigameScene.name);
+        //unhide the scene somehow
     }
 }

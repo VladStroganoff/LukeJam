@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2555366369163795640}
   - component: {fileID: 8827695023340049313}
   - component: {fileID: 8702560244317408953}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GunBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,6 +34,7 @@ Transform:
   - {fileID: 3590187252067008588}
   - {fileID: 882122077492457514}
   - {fileID: 6426891381944646228}
+  - {fileID: 3164509563807299069}
   m_Father: {fileID: 3621868774493677620}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -97,7 +98,7 @@ GameObject:
   - component: {fileID: 3128284982831918010}
   - component: {fileID: 2224096451652239005}
   - component: {fileID: 489055397684362579}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4967,7 +4968,7 @@ GameObject:
   - component: {fileID: 6426891381944646228}
   - component: {fileID: 418855910639104507}
   - component: {fileID: 2009972451540665529}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MuzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9837,7 +9838,7 @@ GameObject:
   m_Component:
   - component: {fileID: 882122077492457514}
   - component: {fileID: 2508845529697051337}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9930,7 +9931,7 @@ GameObject:
   - component: {fileID: 3621868774493677620}
   - component: {fileID: 4109718112599159437}
   - component: {fileID: 4109718112599159436}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9973,6 +9974,8 @@ MonoBehaviour:
   ShootAction:
     actionPath: /actions/default/in/Shoot
     needsReinit: 0
+  InfiniteAmmo: 1
+  Ammo: 3
 --- !u!95 &4109718112599159436
 Animator:
   serializedVersion: 3
@@ -10001,7 +10004,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3590187252067008588}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bone_Muzzle
   m_TagString: Bone
   m_Icon: {fileID: 0}
@@ -10033,7 +10036,7 @@ GameObject:
   - component: {fileID: 3966578436605796961}
   - component: {fileID: 8890190622969909552}
   - component: {fileID: 4677678241146758605}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10103,6 +10106,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7722911096661310607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3164509563807299069}
+  m_Layer: 2
+  m_Name: Bone_SightTarget
+  m_TagString: Bone
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3164509563807299069
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7722911096661310607}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0.2724, y: 0, z: 0.1304}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2555366369163795640}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &7787191454739218336
 GameObject:
   m_ObjectHideFlags: 0
@@ -10114,7 +10147,7 @@ GameObject:
   - component: {fileID: 6045254286725570635}
   - component: {fileID: 4036006004291962591}
   - component: {fileID: 4169160924196800951}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Mantle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10195,7 +10228,7 @@ GameObject:
   - component: {fileID: 5271955310985960474}
   - component: {fileID: 6910970632892365571}
   - component: {fileID: 4531362184491091884}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Casing Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

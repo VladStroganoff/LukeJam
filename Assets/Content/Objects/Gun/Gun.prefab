@@ -9974,6 +9974,8 @@ MonoBehaviour:
   ShootAction:
     actionPath: /actions/default/in/Shoot
     needsReinit: 0
+  BulletHolePrefab: {fileID: 5114225976651845898, guid: 90d5269597f0cdb4cbc4962fefe2f407,
+    type: 3}
 --- !u!95 &4109718112599159436
 Animator:
   serializedVersion: 3
@@ -10017,7 +10019,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4399394298189740243}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0.2724, y: 0, z: 0.098900035}
+  m_LocalPosition: {x: 0.2714, y: 0.098, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2555366369163795640}
@@ -10128,7 +10130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7722911096661310607}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0.2724, y: 0, z: 0.1304}
+  m_LocalPosition: {x: 0.2545, y: 0.12864, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2555366369163795640}

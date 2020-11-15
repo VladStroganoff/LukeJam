@@ -16,6 +16,7 @@ namespace Assets.Scripts
         private Transform _muzzleBone;
         private Transform _sightTargetBone;
         public SteamVR_Action_Boolean ShootAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("default", "Shoot");
+        public GameObject BulletHolePrefab;
 
         void Start()
         {
@@ -37,7 +38,8 @@ namespace Assets.Scripts
             var ray = new Ray(_sightTargetBone.position, _sightTargetBone.forward);
             var cast = Physics.Raycast(ray, out var rayHit, RayDistance, -1, QueryTriggerInteraction.UseGlobal);
             var rayhit = rayHit.transform?.gameObject?.GetComponents<ITarget>();
-
+            var collisionPoint = rayHit.point;
+            Instantiate(BulletHolePrefab, collisionPoint, new Quaternion());
 
             if (rayhit != null && rayhit.Length > 0)
             {

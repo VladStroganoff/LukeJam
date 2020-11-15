@@ -7,7 +7,7 @@ namespace Assets.Scripts
     {
         public void Hit()
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 }

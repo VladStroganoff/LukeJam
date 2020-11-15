@@ -35,6 +35,23 @@ namespace Assets.Scripts
                 var alien = queue.Pop();
                 alien.SetActive(true);
             }
+
+            foreach (var alien in _aliens)
+            {
+                if (!alien.activeInHierarchy)
+                    DestroyImmediate(alien);
+            }
+        }
+
+        void Update()
+        {
+            if (_aliens.Count == 0)
+                Win();
+        }
+
+        void Win()
+        {
+            
         }
     }
 }

@@ -68,7 +68,6 @@ namespace Assets.Scripts
         }
 
 
-
         private void ShootAction_onStateDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
         {
             Fire();

@@ -12,6 +12,8 @@ namespace Assets.Scripts
         private List<Transform> _bones = new List<Transform>();
         private Transform _muzzleBone;
         public SteamVR_Action_Boolean ShootAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("default", "Shoot");
+        public bool InfiniteAmmo = true;
+        public int Ammo = 3;
 
         void Start()
         {
@@ -29,9 +31,7 @@ namespace Assets.Scripts
         {
             var ray = new Ray(_muzzleBone.position, _muzzleBone.forward);
             var cast = Physics.Raycast(ray, out var rayHit, RayDistance, -1, QueryTriggerInteraction.UseGlobal);
-            Debug.DrawRay(_muzzleBone.position, _muzzleBone.forward, Color.red);
             var rayhit = rayHit.transform?.gameObject?.GetComponents<ITarget>();
-            Debug.Log(rayHit.transform?.gameObject);
             if (rayhit != null && rayhit.Length > 0)
                 foreach (ITarget target in rayhit)
                 {

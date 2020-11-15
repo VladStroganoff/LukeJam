@@ -8,6 +8,8 @@ public class ShootGranade : MonoBehaviour
     public void ShootGranadeAtPlayer(Vector3 targetPos)
     {
         Instantiate(GranadePrefab, transform.position, transform.rotation);
+        //Rigidbody granada = Grana
     }
 
 }
+//

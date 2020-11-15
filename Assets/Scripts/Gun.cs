@@ -8,8 +8,12 @@ namespace Assets.Scripts
     {
         public ParticleSystem Casing;
         public ParticleSystem MuzzleFlash;
-        public List<AudioSource> Audio = new List<AudioSource>();
-        public Animator Animator; 
+        public AudioSource audioSource;
+        public Animator Animator;
+
+        public float fireRateInterval = 0.3f;
+        private float firingTimer = 0;
+        private bool triggerDown;
 
         public float RayDistance = 1000f;
         private List<Transform> _bones = new List<Transform>();
@@ -38,6 +42,8 @@ namespace Assets.Scripts
             var cast = Physics.Raycast(ray, out var rayHit, RayDistance, -1, QueryTriggerInteraction.UseGlobal);
             var rayhit = rayHit.transform?.gameObject?.GetComponents<ITarget>();
 
+            audioSource.pitch = Random.Range(0.85f, 1.15f);
+            audioSource.Play();
 
             if (rayhit != null && rayhit.Length > 0)
             {
@@ -50,10 +56,24 @@ namespace Assets.Scripts
 
         private void Update()
         {
+            FireLogic();
+        }
+
+        private void FireLogic()
+        {
+            firingTimer -= Time.deltaTime;
             if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") > 0.2f)
             {
-                Fire();
-
+                if (firingTimer <= 0f && !triggerDown)
+                {
+                    Fire();
+                    firingTimer = fireRateInterval;
+                }
+                triggerDown = true;
+            }
+            else
+            {
+                triggerDown = false;
             }
 
         }

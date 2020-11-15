@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1796528b5d87fc6478f2cf20f328c27d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundHeight: 0
+  GroundHeight: 0.1
   FlipCounter: 0
   WinScore: 3
   ForceMultiplier: 2

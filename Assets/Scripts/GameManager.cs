@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadMiniGame(Object minigameScene)
     {
+        Debug.Log("loading " + minigameScene.name);
         //hide the scene somehow
         if(!string.IsNullOrEmpty(ActiveMinigame))
             SceneManager.UnloadSceneAsync(ActiveMinigame);

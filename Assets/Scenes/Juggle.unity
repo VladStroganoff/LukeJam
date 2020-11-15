@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 1075250173}
   - component: {fileID: 1075250174}
   - component: {fileID: 1075250169}
+  - component: {fileID: 1075250175}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -436,10 +437,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1796528b5d87fc6478f2cf20f328c27d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundHeight: 0.1
   FlipCounter: 0
   WinScore: 3
   ForceMultiplier: 2
   ScoreCounter: {fileID: 1012443335}
+--- !u!114 &1075250175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075250168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38b7717b04915294088446d3edfb640c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!21 &1127973610
 Material:
   serializedVersion: 6
@@ -940,6 +954,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SteamVR Player and Systems
+      objectReference: {fileID: 0}
+    - target: {fileID: 5554796096651093244, guid: a2f7d23804daa8846b83a8841a781d60,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2f7d23804daa8846b83a8841a781d60, type: 3}

@@ -347,6 +347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HubWorldScene: {fileID: 102900000, guid: 8599f84d83002c3489c667e5bd4d3707, type: 3}
   MinigameScenes:
+  - {fileID: 102900000, guid: 85a48c80ece587d4ab19c9ff62e31e10, type: 3}
   - {fileID: 102900000, guid: 41cad15960bb1d447ab918a378721fd5, type: 3}
   ActiveMinigame: 
   PlayerHealth: 5

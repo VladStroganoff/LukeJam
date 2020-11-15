@@ -33,16 +33,20 @@ namespace Assets.Scripts
             transform.position.Set(transform.position.x, GroundHeight + 0.1f, transform.position.z);
             if (FlipCounter < WinScore)
                 Lose();
-            Win();
+            else
+                Win();
         }
 
         private void Win()
         {
-
+            Debug.Log("COIN FLIP WIN");
+            GetComponent<MinigameManager>().EndMinigame(Result.Win);
         }
 
         private void Lose()
         {
+            Debug.Log("COIN FLIP LOSS");
+            GetComponent<MinigameManager>().EndMinigame(Result.Loss);
 
         }
 

@@ -45,12 +45,17 @@ namespace Assets.Scripts
 
         void Update()
         {
-            if (_aliens.Count == 0)
-                Win();
+            foreach (var alien in _aliens)
+            {
+                if (alien)
+                    return;
+            }
+            Win();
         }
 
         void Win()
         {
+            Debug.Log("WALLY WIN");
             GetComponent<MinigameManager>().EndMinigame(Result.Win);
         }
     }

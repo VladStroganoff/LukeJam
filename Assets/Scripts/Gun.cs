@@ -6,14 +6,14 @@ namespace Assets.Scripts
 {
     public class Gun : MonoBehaviour
     {
-        public List<ParticleSystem> Particles = new List<ParticleSystem>();
+        public ParticleSystem Casing;
+        public ParticleSystem MuzzleFlash;
         public List<AudioSource> Audio = new List<AudioSource>();
+        public Animator Animator;
         public float RayDistance = 1000f;
         private List<Transform> _bones = new List<Transform>();
         private Transform _muzzleBone;
         public SteamVR_Action_Boolean ShootAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("default", "Shoot");
-        public bool InfiniteAmmo = true;
-        public int Ammo = 3;
 
         void Start()
         {
@@ -29,9 +29,12 @@ namespace Assets.Scripts
 
         public void Fire()
         {
+            Animator.SetTrigger("Shoot");
             var ray = new Ray(_muzzleBone.position, _muzzleBone.forward);
             var cast = Physics.Raycast(ray, out var rayHit, RayDistance, -1, QueryTriggerInteraction.UseGlobal);
+            Debug.DrawRay(_muzzleBone.position, _muzzleBone.forward, Color.red);
             var rayhit = rayHit.transform?.gameObject?.GetComponents<ITarget>();
+            Debug.Log(rayHit.transform?.gameObject);
             if (rayhit != null && rayhit.Length > 0)
                 foreach (ITarget target in rayhit)
                 {
@@ -39,13 +42,26 @@ namespace Assets.Scripts
                 }
         }
 
-        public void ShootingGraphics()
+        private void Update()
         {
-            foreach (ParticleSystem sys in Particles)
+
+            if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") > 0.2f)
             {
-                sys.Emit(1);
+                Fire();
+                Debug.Log("KUKEN!");
             }
+
         }
+
+        public void CasingParticle()
+        {
+            Casing.Emit(1);
+        }
+        public void Flash()
+        {
+            MuzzleFlash.Emit(1);
+        }
+
 
         private void ShootAction_onStateDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
         {

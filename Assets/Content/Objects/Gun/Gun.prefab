@@ -192,7 +192,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -4983,7 +4983,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2787924978531482943}
   m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.266, y: 0, z: 0.105000034}
+  m_LocalPosition: {x: 0.2718, y: 0.0966, z: -0.0022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3128284982831918010}
@@ -5063,7 +5063,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -9974,8 +9974,6 @@ MonoBehaviour:
   ShootAction:
     actionPath: /actions/default/in/Shoot
     needsReinit: 0
-  InfiniteAmmo: 1
-  Ammo: 3
 --- !u!95 &4109718112599159436
 Animator:
   serializedVersion: 3
@@ -10242,13 +10240,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8786295643769334520}
-  m_LocalRotation: {x: 0.9404653, y: 0, z: 0, w: -0.33988982}
-  m_LocalPosition: {x: 0.057, y: 0.096, z: 0}
+  m_LocalRotation: {x: 0, y: -0.9396927, z: 0.34202018, w: 0}
+  m_LocalPosition: {x: 0.1085, y: -0.0197, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3621868774493677620}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 222.373, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 140, y: 0, z: 180}
 --- !u!198 &6910970632892365571
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -10263,7 +10261,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -10322,7 +10320,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -15041,7 +15039,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fd7ba4c04687b61468f012e491c3c26d, type: 2}
+  - {fileID: 2100000, guid: 6b9ded03aaef46145a0006eb9b5ddccb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

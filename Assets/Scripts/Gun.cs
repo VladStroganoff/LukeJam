@@ -6,8 +6,10 @@ namespace Assets.Scripts
 {
     public class Gun : MonoBehaviour
     {
-        public List<ParticleSystem> Particles = new List<ParticleSystem>();
+        public ParticleSystem Casing;
+        public ParticleSystem MuzzleFlash;
         public List<AudioSource> Audio = new List<AudioSource>();
+        public Animator Animator; 
         public float RayDistance = 1000f;
         private List<Transform> _bones = new List<Transform>();
         private Transform _muzzleBone;
@@ -29,6 +31,7 @@ namespace Assets.Scripts
 
         public void Fire()
         {
+            Animator.SetTrigger("Shoot");
             var ray = new Ray(_muzzleBone.position, _muzzleBone.forward);
             var cast = Physics.Raycast(ray, out var rayHit, RayDistance, -1, QueryTriggerInteraction.UseGlobal);
             var rayhit = rayHit.transform?.gameObject?.GetComponents<ITarget>();
@@ -39,13 +42,15 @@ namespace Assets.Scripts
                 }
         }
 
-        public void ShootingGraphics()
+        public void CasingParticle()
         {
-            foreach (ParticleSystem sys in Particles)
-            {
-                sys.Emit(1);
-            }
+            Casing.Emit(1);
         }
+        public void Flash()
+        {
+            MuzzleFlash.Emit(1);
+        }
+
 
         private void ShootAction_onStateDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
         {

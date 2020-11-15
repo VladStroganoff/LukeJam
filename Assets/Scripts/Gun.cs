@@ -10,13 +10,12 @@ namespace Assets.Scripts
         public ParticleSystem MuzzleFlash;
         public List<AudioSource> Audio = new List<AudioSource>();
         public Animator Animator; 
+
         public float RayDistance = 1000f;
         private List<Transform> _bones = new List<Transform>();
         private Transform _muzzleBone;
         private Transform _sightTargetBone;
         public SteamVR_Action_Boolean ShootAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("default", "Shoot");
-        public bool InfiniteAmmo = true;
-        public int Ammo = 3;
 
         void Start()
         {
@@ -43,6 +42,7 @@ namespace Assets.Scripts
             Debug.Log(QueryTriggerInteraction.UseGlobal);
             Debug.Log(LayerMask.LayerToName(0));
 
+
             if (rayhit != null && rayhit.Length > 0)
             {
                 Debug.Log("2");
@@ -60,7 +60,9 @@ namespace Assets.Scripts
             if (Input.GetAxis("Oculus_CrossPlatform_SecondaryIndexTrigger") > 0.2f)
             {
                 Fire();
+
             }
+
         }
 
         public void CasingParticle()
@@ -71,6 +73,16 @@ namespace Assets.Scripts
         {
             MuzzleFlash.Emit(1);
         }
+
+        public void CasingParticle()
+        {
+            Casing.Emit(1);
+        }
+        public void Flash()
+        {
+            MuzzleFlash.Emit(1);
+        }
+
 
 
         private void ShootAction_onStateDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)

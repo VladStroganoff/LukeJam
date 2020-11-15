@@ -9971,7 +9971,7 @@ MonoBehaviour:
   MuzzleFlash: {fileID: 418855910639104507}
   audioSource: {fileID: 7186537477723901767}
   Animator: {fileID: 4109718112599159436}
-  fireRateInterval: 0.3
+  fireRateInterval: 0.2
   RayDistance: 1000
   ShootAction:
     actionPath: /actions/default/in/Shoot

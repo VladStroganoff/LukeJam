@@ -80,7 +80,8 @@ public class GameManager : MonoBehaviour
     private void LoadMiniGame(Object minigameScene)
     {
         //hide the scene somehow
-        SceneManager.UnloadSceneAsync(ActiveMinigame);
+        if(!string.IsNullOrEmpty(ActiveMinigame))
+            SceneManager.UnloadSceneAsync(ActiveMinigame);
         ActiveMinigame = minigameScene.name;
         SceneManager.LoadSceneAsync(minigameScene.name, LoadSceneMode.Additive);
         //unhide the scene somehow

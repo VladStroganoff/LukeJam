@@ -51,7 +51,7 @@ namespace Assets.Scripts
 
         void Win()
         {
-            
+            GetComponent<MinigameManager>().EndMinigame(Result.Win);
         }
     }
 }

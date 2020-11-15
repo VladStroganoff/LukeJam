@@ -21,11 +21,13 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    public List<Scene> Minigames;
+    public Object HubWorldScene;
+
+    public List<Object> MinigameScenes;
 
     private int MinigameIterator = 0;
 
-    public Scene ActiveMinigame;
+    public string ActiveMinigame;
     // int score
     // int difficulty
 
@@ -36,16 +38,21 @@ public class GameManager : MonoBehaviour
         if(Instance)
         {
             Debug.LogError("Why are there two game managers");
+            return;
         }
         else
         {
             Instance = this;
         }
+
+        SceneManager.LoadSceneAsync(HubWorldScene.name, LoadSceneMode.Additive);
+
     }
 
-    public void StartGame()
+    public void StartMinigames()
     {
-        LoadMiniGame(Minigames[MinigameIterator]);
+        SceneManager.UnloadSceneAsync(HubWorldScene.name);
+        LoadMiniGame(MinigameScenes[MinigameIterator]);
     }
 
     public void MiniGameFinished(Result miniGameResult)
@@ -65,17 +72,17 @@ public class GameManager : MonoBehaviour
     private void NextMiniGame()
     {
         MinigameIterator += 1;
-        if (MinigameIterator >= Minigames.Count)
+        if (MinigameIterator >= MinigameScenes.Count)
             MinigameIterator = 0; //Loop
-        LoadMiniGame(Minigames[MinigameIterator]);
+        LoadMiniGame(MinigameScenes[MinigameIterator]);
     }
 
-    private void LoadMiniGame(Scene minigameScene)
+    private void LoadMiniGame(Object minigameScene)
     {
         //hide the scene somehow
         SceneManager.UnloadSceneAsync(ActiveMinigame);
-        ActiveMinigame = minigameScene;
-        SceneManager.LoadSceneAsync(minigameScene.name);
+        ActiveMinigame = minigameScene.name;
+        SceneManager.LoadSceneAsync(minigameScene.name, LoadSceneMode.Additive);
         //unhide the scene somehow
     }
 }

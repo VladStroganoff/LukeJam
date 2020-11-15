@@ -9974,8 +9974,6 @@ MonoBehaviour:
   ShootAction:
     actionPath: /actions/default/in/Shoot
     needsReinit: 0
-  InfiniteAmmo: 1
-  Ammo: 3
 --- !u!95 &4109718112599159436
 Animator:
   serializedVersion: 3
@@ -10263,7 +10261,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0

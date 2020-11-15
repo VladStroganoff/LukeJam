@@ -74,16 +74,6 @@ namespace Assets.Scripts
             MuzzleFlash.Emit(1);
         }
 
-        public void CasingParticle()
-        {
-            Casing.Emit(1);
-        }
-        public void Flash()
-        {
-            MuzzleFlash.Emit(1);
-        }
-
-
 
         private void ShootAction_onStateDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
         {

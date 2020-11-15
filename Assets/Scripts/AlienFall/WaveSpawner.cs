@@ -44,7 +44,7 @@ public class WaveSpawner : MonoBehaviour
     private void Update()
     {
 
-        if(state == SpawnState.WAITING)
+        if (state == SpawnState.WAITING)
         {
             if (!EnemyIsAlive())
             {
@@ -55,7 +55,7 @@ public class WaveSpawner : MonoBehaviour
                 return;
             }
         }
-        
+
         if (waveCountdown <= 0)
         {
             if (state != SpawnState.SPAWNING)
@@ -74,7 +74,7 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Wave Completed!");
         waveCountdown = timeBetweenWaves;
 
-        if(nextWave + 1 > waves.Length - 1)
+        if (nextWave + 1 > waves.Length - 1)
         {
             nextWave = 0;
             Debug.Log("All Waves Completed - Looping to first wave");
@@ -118,7 +118,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
     void SpawnEnemy(Transform _enemy)
-    {        
+    {
         Debug.Log("Spawning Enemy: " + _enemy.name);
         Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
         Instantiate(_enemy, _sp.position, _sp.rotation);

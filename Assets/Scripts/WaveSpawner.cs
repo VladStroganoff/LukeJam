@@ -30,6 +30,7 @@ public class WaveSpawner : MonoBehaviour
     {
         if(waveCountdown <= 0)
         {
+            //Spawn(); 
         }
     }
 }

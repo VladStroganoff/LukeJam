@@ -21,18 +21,19 @@ namespace Assets.Scripts
             aliensList.AddRange(_aliens);
             var rand = new Random();
             var shuffledList = aliensList.OrderBy(x => System.Guid.NewGuid()).ToList();
-            foreach (var alien in aliensList)
-                Debug.Log(alien.name);
-            foreach (var alien in shuffledList)
-                Debug.Log(alien.name);
-
-            for (var i = 0; i < AlienEnemyAmount; i++)
-            {
-            }
+            Stack<GameObject> queue = new Stack<GameObject>();
+            foreach (var item in shuffledList)
+                queue.Push(item);
 
             foreach (var alien in _aliens)
             {
                 alien.SetActive(false);
+            }
+
+            for (var i = 0; i < AlienEnemyAmount; i++)
+            {
+                var alien = queue.Pop();
+                alien.SetActive(true);
             }
         }
     }

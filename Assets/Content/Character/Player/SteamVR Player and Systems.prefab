@@ -539,36 +539,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4867054445652092172}
     m_Modifications:
-    - target: {fileID: 3164509563807299069, guid: 62d45a851c27e07408f3294b3ae0bf43,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.2716
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164509563807299069, guid: 62d45a851c27e07408f3294b3ae0bf43,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.1288
-      objectReference: {fileID: 0}
-    - target: {fileID: 3164509563807299069, guid: 62d45a851c27e07408f3294b3ae0bf43,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3590187252067008588, guid: 62d45a851c27e07408f3294b3ae0bf43,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.2739
-      objectReference: {fileID: 0}
-    - target: {fileID: 3590187252067008588, guid: 62d45a851c27e07408f3294b3ae0bf43,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0984
-      objectReference: {fileID: 0}
-    - target: {fileID: 3590187252067008588, guid: 62d45a851c27e07408f3294b3ae0bf43,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.0006
-      objectReference: {fileID: 0}
     - target: {fileID: 3621868774493677620, guid: 62d45a851c27e07408f3294b3ae0bf43,
         type: 3}
       propertyPath: m_LocalPosition.x

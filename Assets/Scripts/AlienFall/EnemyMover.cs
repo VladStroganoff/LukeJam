@@ -22,7 +22,6 @@ public class EnemyMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
         //transform.LookAt(player.transform);

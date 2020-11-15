@@ -13,7 +13,7 @@ public class EnemyMover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("PlayerHurtArea");
     }
 
     // Update is called once per frame

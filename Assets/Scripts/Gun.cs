@@ -36,20 +36,13 @@ namespace Assets.Scripts
         {
             Animator.SetTrigger("Shoot");
             var ray = new Ray(_sightTargetBone.position, _sightTargetBone.forward);
-            var cast = Physics.Raycast(ray, out var rayHit, RayDistance, 0, QueryTriggerInteraction.UseGlobal);
-            Debug.Log("1");
+            var cast = Physics.Raycast(ray, out var rayHit, RayDistance, -1, QueryTriggerInteraction.UseGlobal);
             var rayhit = rayHit.transform?.gameObject?.GetComponents<ITarget>();
-            Debug.Log(RayDistance);
-            Debug.Log(QueryTriggerInteraction.UseGlobal);
-            Debug.Log(LayerMask.LayerToName(0));
 
             if (rayhit != null && rayhit.Length > 0)
             {
-                Debug.Log("2");
                 foreach (ITarget target in rayhit)
                 {
-                    Debug.Log("3");
-                    Debug.DrawRay(_sightTargetBone.position, _sightTargetBone.forward, Color.red, 1f);
                     target.Hit();
                 }
             }

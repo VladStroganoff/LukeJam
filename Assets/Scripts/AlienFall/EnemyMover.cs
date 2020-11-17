@@ -31,7 +31,10 @@ public class EnemyMover : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "PlayerHurtArea")
+        {
             Destroy(gameObject);
+            Lose();
             //Debug.Log("Collision of " + this.gameObject);
+        }
     }
 }

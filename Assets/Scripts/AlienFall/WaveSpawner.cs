@@ -17,7 +17,11 @@ public class WaveSpawner : MonoBehaviour
 
     public Wave[] waves;
     private int nextWave = 0;
-    public Transform[] spawnPoints;
+    public Transform[] spawnAreas;
+    private Vector3 spawnAreaCenter;
+    private Vector3 spawnAreaSize;
+    private Vector3 spawnRotation;
+    public float spawnRotationVariance = 150f;
 
     public float timeBetweenWaves = 5f;
     private float waveCountdown;
@@ -28,9 +32,9 @@ public class WaveSpawner : MonoBehaviour
 
     void Start()
     {
-        if (spawnPoints.Length == 0)
+        if (spawnAreas.Length == 0)
         {
-            Debug.LogError("No spawnpoints referenced.");
+            Debug.LogError("No spawnAreas referenced.");
         }
 
         if (waves.Length == 0)
@@ -43,30 +47,30 @@ public class WaveSpawner : MonoBehaviour
 
     private void Update()
     {
-
-        if (state == SpawnState.WAITING)
+        switch (state)
         {
-            if (!EnemyIsAlive())
-            {
-                WaveCompleted();
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        if (waveCountdown <= 0)
-        {
-            if (state != SpawnState.SPAWNING)
-            {
-                StartCoroutine(SpawnWave(waves[nextWave]));
-            }
-            else
-            {
-                waveCountdown -= Time.deltaTime;
-            }
-        }
+            case SpawnState.COUNTING:
+                if (waveCountdown <= 0)
+                {
+                    StartCoroutine(SpawnWave(waves[nextWave]));
+                    state = SpawnState.SPAWNING;
+                }
+                else
+                {
+                    waveCountdown -= Time.deltaTime;
+                }
+                break;
+            case SpawnState.WAITING:
+                if (!EnemyIsAlive())
+                {
+                    WaveCompleted();
+                }
+                else
+                {
+                    Debug.Log("Enemy is alive!");
+                }
+                break;
+        }  
     }
 
     void WaveCompleted()
@@ -74,17 +78,20 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Wave Completed!");
         waveCountdown = timeBetweenWaves;
 
+        state = SpawnState.COUNTING;
+
         if (nextWave + 1 > waves.Length - 1)
         {
-            nextWave = 0;
+            //Win();
+            
             Debug.Log("All Waves Completed - Looping to first wave");
+            nextWave = 0;
         }
         else
         {
             nextWave++;
         }
     }
-
 
     bool EnemyIsAlive()
     {
@@ -111,7 +118,6 @@ public class WaveSpawner : MonoBehaviour
             SpawnEnemy(_wave.enemy);
             yield return new WaitForSeconds(1f / _wave.rate);
         }
-
         state = SpawnState.WAITING;
 
         yield break;
@@ -119,10 +125,23 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnEnemy(Transform _enemy)
     {
-        Debug.Log("Spawning Enemy: " + _enemy.name);
-        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(_enemy, _sp.position, _sp.rotation);
+        //Debug.Log("Spawning Enemy: " + _enemy.name);
+        Transform _sp = spawnAreas[Random.Range(0, spawnAreas.Length)];
+
+        spawnAreaCenter = _sp.transform.position;
+        spawnAreaSize = _sp.transform.localScale;
+        Vector3 pos = spawnAreaCenter + new Vector3(Random.Range(-spawnAreaSize.x / 2, spawnAreaSize.x / 2), Random.Range(-spawnAreaSize.y / 2, spawnAreaSize.y / 2), Random.Range(-spawnAreaSize.z / 2, spawnAreaSize.z / 2));
+        
+        float spawnRotationY = _sp.rotation.y + Random.Range(-spawnRotationVariance, spawnRotationVariance);
+        Quaternion rot = Quaternion.Euler(0, spawnRotationY, 0);
+
+        Instantiate(_enemy, pos, rot);
     }
 
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1, 0, 0, 0.4f);
+        Gizmos.DrawCube(spawnAreaCenter, spawnAreaSize);
+    }
 
 }

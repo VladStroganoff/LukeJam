@@ -82,10 +82,10 @@ public class WaveSpawner : MonoBehaviour
 
         if (nextWave + 1 > waves.Length - 1)
         {
-            //Win();
-            
-            Debug.Log("All Waves Completed - Looping to first wave");
-            nextWave = 0;
+            Win();
+            timeBetweenWaves = 10f;
+            //Debug.Log("All Waves Completed - Looping to first wave");
+            //nextWave = 0;
         }
         else
         {

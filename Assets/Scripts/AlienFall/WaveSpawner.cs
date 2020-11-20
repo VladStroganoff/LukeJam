@@ -84,14 +84,13 @@ public class WaveSpawner : MonoBehaviour
         {
             Win();
             timeBetweenWaves = 10f;
-            //Debug.Log("All Waves Completed - Looping to first wave");
-            //nextWave = 0;
         }
         else
         {
             nextWave++;
         }
     }
+
 
     bool EnemyIsAlive()
     {
@@ -125,7 +124,6 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnEnemy(Transform _enemy)
     {
-        //Debug.Log("Spawning Enemy: " + _enemy.name);
         Transform _sp = spawnAreas[Random.Range(0, spawnAreas.Length)];
 
         spawnAreaCenter = _sp.transform.position;
@@ -144,4 +142,8 @@ public class WaveSpawner : MonoBehaviour
         Gizmos.DrawCube(spawnAreaCenter, spawnAreaSize);
     }
 
+    private void Win()
+    {
+        throw new System.NotImplementedException();
+    }
 }

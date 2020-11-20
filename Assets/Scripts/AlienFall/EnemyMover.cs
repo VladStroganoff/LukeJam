@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,8 +27,6 @@ public class EnemyMover : MonoBehaviour
         transform.position += transform.forward * Time.deltaTime * moveSpeed;
     }
 
-
-
     void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "PlayerHurtArea")
@@ -36,5 +35,10 @@ public class EnemyMover : MonoBehaviour
             Lose();
             //Debug.Log("Collision of " + this.gameObject);
         }
+    }
+
+    private void Lose()
+    {
+        throw new NotImplementedException();
     }
 }

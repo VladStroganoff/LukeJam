@@ -15,12 +15,12 @@ namespace Assets.Scripts
         public float ForceMultiplier = 2f;
         public TextMesh ScoreCounter;
 
-        void Start()
+        private void Start()
         {
             _rigidBody = gameObject.GetComponent<Rigidbody>();
         }
 
-        void Update()
+        private void Update()
         {
             if (transform.position.y < GroundHeight)
                 GameOver();
@@ -30,9 +30,17 @@ namespace Assets.Scripts
         {
             _gameOver = true;
             _rigidBody.isKinematic = true;
-            transform.position.Set(transform.position.x, GroundHeight + 0.1f, transform.position.z);
+
+            transform.position.Set
+            (
+                newX: transform.position.x,
+                newY: GroundHeight + 0.1f,
+                newZ: transform.position.z
+            );
+
             if (FlipCounter < WinScore)
                 Lose();
+
             Win();
         }
 
@@ -64,7 +72,12 @@ namespace Assets.Scripts
         {
             FlipCounter++;
             ScoreCounter.text = FlipCounter.ToString();
-            _rigidBody.AddForce(Random.Range(-0.05f, 0.05f), 1f * ForceMultiplier, Random.Range(-0.05f, 0.05f), ForceMode.Impulse);
+            _rigidBody.AddForce
+            (
+                x: Random.Range(-0.05f, 0.05f),
+                y: 1f * ForceMultiplier,
+                z: Random.Range(-0.05f, 0.05f), ForceMode.Impulse
+            );
         }
     }
 }

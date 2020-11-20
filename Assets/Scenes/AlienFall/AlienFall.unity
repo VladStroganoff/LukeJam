@@ -421,26 +421,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe2a95514a70834c9c919270c19a85f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves:
-  - name: First Wave
+  Waves:
+  - name: Ya mum
     enemy: {fileID: 4300585233217336430, guid: c3e8effea87293640a57788cdfbc6998, type: 3}
-    count: 8
-    rate: 0.5
-  - name: Second Wave
-    enemy: {fileID: 6810233304942853010, guid: a4526bb5f02a2504bae9b90916cc0e14, type: 3}
-    count: 14
+    count: 5
     rate: 1
-  - name: Third Wave
-    enemy: {fileID: 2458937543905013393, guid: 493947eb1512682468189236af05ea34, type: 3}
-    count: 26
-    rate: 1.2
-  spawnAreas:
+  SpawnAreas:
   - {fileID: 810148080}
   - {fileID: 177610622}
   - {fileID: 2008364314}
   - {fileID: 1532373432}
-  spawnRotationVariance: 150
-  timeBetweenWaves: 5
+  SpawnRotationVariance: 150
+  TimeBetweenWaves: 5
 --- !u!64 &443433288
 MeshCollider:
   m_ObjectHideFlags: 0

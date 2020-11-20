@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -8,32 +6,28 @@ public class EnemyMover : MonoBehaviour
 {
     private GameObject _player;
 
-    public float moveSpeed = 1.6f;
-    public float rotateSpeed = 1.4f;
+    public float MoveSpeed = 1.6f;
+    public float RotateSpeed = 1.4f;
 
-    // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         Quaternion targetRotation = Quaternion.LookRotation(_player.transform.position - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
-        //transform.LookAt(player.transform);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, RotateSpeed * Time.deltaTime);
 
-        transform.position += transform.forward * Time.deltaTime * moveSpeed;
+        transform.position += transform.forward * Time.deltaTime * MoveSpeed;
     }
 
-    void OnTriggerEnter(Collider collider)
+    protected void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "PlayerHurtArea")
+        if (collider.tag == "PlayerHurtArea") //TODO: replace tagging system [?]
         {
             Destroy(gameObject);
             Lose();
-            //Debug.Log("Collision of " + this.gameObject);
         }
     }
 

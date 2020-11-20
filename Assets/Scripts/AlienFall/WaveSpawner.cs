@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public enum SpawnState { SPAWNING, WAITING, COUNTING };
+    public enum SpawnState { SPAWNING, WAITING, COUNTING, GAMEOVER };
 
     [System.Serializable]
     public class Wave
@@ -15,135 +15,126 @@ public class WaveSpawner : MonoBehaviour
         public float rate;
     }
 
-    public Wave[] waves;
-    private int nextWave = 0;
-    public Transform[] spawnAreas;
-    private Vector3 spawnAreaCenter;
-    private Vector3 spawnAreaSize;
-    private Vector3 spawnRotation;
-    public float spawnRotationVariance = 150f;
+    public Wave[] Waves;
+    private int _nextWave = 0;
+    public Transform[] SpawnAreas;
+    private Vector3 _spawnAreaCenter;
+    private Vector3 _spawnAreaSize;
+    public float SpawnRotationVariance = 150f;
 
-    public float timeBetweenWaves = 5f;
-    private float waveCountdown;
+    public float TimeBetweenWaves = 5f;
+    private float _waveCountdown;
 
-    private float searchCountDown = 1f;
+    private float _searchCountDown = 1f;
 
-    private SpawnState state = SpawnState.COUNTING;
+    private SpawnState _state = SpawnState.COUNTING;
 
-    void Start()
+    private void Start()
     {
-        if (spawnAreas.Length == 0)
-        {
+        if (SpawnAreas.Length == 0)
             Debug.LogError("No spawnAreas referenced.");
-        }
 
-        if (waves.Length == 0)
-        {
+        if (Waves.Length == 0)
             Debug.LogError("No Enemy Waves defined.");
-        }
 
-        waveCountdown = timeBetweenWaves;
+        _waveCountdown = TimeBetweenWaves;
     }
 
     private void Update()
     {
-        switch (state)
+        switch (_state)
         {
             case SpawnState.COUNTING:
-                if (waveCountdown <= 0)
-                {
-                    StartCoroutine(SpawnWave(waves[nextWave]));
-                    state = SpawnState.SPAWNING;
-                }
+                if (_waveCountdown > 0)
+                    _waveCountdown -= Time.deltaTime;
                 else
                 {
-                    waveCountdown -= Time.deltaTime;
+                    StartCoroutine(SpawnWave(Waves[_nextWave]));
+                    _state = SpawnState.SPAWNING;
                 }
                 break;
+
             case SpawnState.WAITING:
                 if (!EnemyIsAlive())
-                {
                     WaveCompleted();
-                }
                 else
-                {
                     Debug.Log("Enemy is alive!");
-                }
                 break;
         }  
     }
 
-    void WaveCompleted()
+    private void WaveCompleted()
     {
-        Debug.Log("Wave Completed!");
-        waveCountdown = timeBetweenWaves;
+        _waveCountdown = TimeBetweenWaves;
 
-        state = SpawnState.COUNTING;
+        _state = SpawnState.COUNTING;
 
-        if (nextWave + 1 > waves.Length - 1)
-        {
-            Win();
-            timeBetweenWaves = 10f;
-        }
+        if (_nextWave + 1 <= Waves.Length - 1)
+            _nextWave++;
         else
-        {
-            nextWave++;
-        }
+            Win();
     }
 
 
-    bool EnemyIsAlive()
+    private bool EnemyIsAlive()
     {
-        searchCountDown -= Time.deltaTime;
-        if (searchCountDown <= 0f)
-        {
-            searchCountDown = 1f;
-            if (GameObject.FindGameObjectWithTag("Enemy") == null)
-            {
-                return false;
-            }
-        }
+        _searchCountDown -= Time.deltaTime;
+
+        if (_searchCountDown > 0f)
+            return true;
+
+        _searchCountDown = 1f;
+
+        if (GameObject.FindGameObjectWithTag("Enemy") == null)
+            return false;
+
         return true;
     }
 
-    IEnumerator SpawnWave(Wave _wave)
+    private IEnumerator SpawnWave(Wave _wave)
     {
         Debug.Log("Spawning Wave: " + _wave.name);
-        state = SpawnState.SPAWNING;
+        _state = SpawnState.SPAWNING;
 
-        //Spawn
-        for (int i = 0; i < _wave.count; i++)
+        for (var i = 0; i < _wave.count; i++)
         {
             SpawnEnemy(_wave.enemy);
             yield return new WaitForSeconds(1f / _wave.rate);
         }
-        state = SpawnState.WAITING;
+        _state = SpawnState.WAITING;
 
         yield break;
     }
 
-    void SpawnEnemy(Transform _enemy)
+    private void SpawnEnemy(Transform _enemy)
     {
-        Transform _sp = spawnAreas[Random.Range(0, spawnAreas.Length)];
+        Transform _sp = SpawnAreas[Random.Range(0, SpawnAreas.Length)];
 
-        spawnAreaCenter = _sp.transform.position;
-        spawnAreaSize = _sp.transform.localScale;
-        Vector3 pos = spawnAreaCenter + new Vector3(Random.Range(-spawnAreaSize.x / 2, spawnAreaSize.x / 2), Random.Range(-spawnAreaSize.y / 2, spawnAreaSize.y / 2), Random.Range(-spawnAreaSize.z / 2, spawnAreaSize.z / 2));
+        _spawnAreaCenter = _sp.transform.position;
+        _spawnAreaSize = _sp.transform.localScale;
+        Vector3 pos = _spawnAreaCenter + 
+            new Vector3
+            (
+                x: Random.Range(-_spawnAreaSize.x / 2, _spawnAreaSize.x / 2),
+                y: Random.Range(-_spawnAreaSize.y / 2, _spawnAreaSize.y / 2),
+                z: Random.Range(-_spawnAreaSize.z / 2, _spawnAreaSize.z / 2)
+            );
         
-        float spawnRotationY = _sp.rotation.y + Random.Range(-spawnRotationVariance, spawnRotationVariance);
-        Quaternion rot = Quaternion.Euler(0, spawnRotationY, 0);
+        var spawnRotationY = _sp.rotation.y + Random.Range(-SpawnRotationVariance, SpawnRotationVariance);
+        var rot = Quaternion.Euler(0, spawnRotationY, 0);
 
         Instantiate(_enemy, pos, rot);
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1, 0, 0, 0.4f);
-        Gizmos.DrawCube(spawnAreaCenter, spawnAreaSize);
+        Gizmos.DrawCube(_spawnAreaCenter, _spawnAreaSize);
     }
 
     private void Win()
     {
+        _state = SpawnState.GAMEOVER;
         throw new System.NotImplementedException();
     }
 }
